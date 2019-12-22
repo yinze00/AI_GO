@@ -59,13 +59,12 @@ def negamax(is_ai, depth, alpha, beta):
     # 游戏是否结束 | | 探索的递归深度是否到边界
     if game_win(list1) or game_win(list2) or depth == 0:
         return evaluation(is_ai)
-
+     
     blank_list = list(set(list_all).difference(set(list3)))
     order(blank_list)   # 搜索顺序排序  提高剪枝效率
     # TODO: 对每一个候选步进行递归并剪枝，将最后决策出的next_point赋值，将函数剩下部分补全
     # .....
     for next_step in blank_list[0:60]:
-        # 我们都朴素有新的大学
         # 如果要评估的位置没有相邻的子， 则不去评估 减少计算
         if not has_neightnor(next_step):
             continue
@@ -180,8 +179,8 @@ def cal_score(m, n, x_decrict, y_derice, enemy_list, my_list, score_all_arr):
     '''
     add_score = 0  # 加分项
     # 在一个方向上， 只取最大的得分项
-    # max_score_shape = (0, None)
-    max_score_shape = [0, None]  # 元组不可整改，先用数组试试，attention
+    max_score_shape = (0, None)
+    # max_score_shape = [0, None]  # 元组不可整改，先用数组试试，attention
     # score_all_arr 得分形状的位置，用于计算是否有有相交，如果有则得分翻倍
     # 如果此方向上，该点已经有得分形状，不重复计算
     for item in score_all_arr:
@@ -387,5 +386,5 @@ def main_Human():
 
 
 if __name__ == '__main__':
-    # main_AI()
-    main_Human()
+    main_AI()
+    # main_Human()
