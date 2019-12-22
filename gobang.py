@@ -65,22 +65,21 @@ def negamax(is_ai, depth, alpha, beta):
     # TODO: 对每一个候选步进行递归并剪枝，将最后决策出的next_point赋值，将函数剩下部分补全
     # .....
     for next_step in blank_list[0:60]:
-        # 如果要评估的位置没有相邻的子， 则不去评估 减少计算
+        # 如果要评估的位置没有相邻的子， 则不去评估 减少计算 
         if not has_neightnor(next_step):
             continue
     
         if is_ai:
-            list1.append(next_step)
-        else:
-
             list2.append(next_step)
+        else:
+            list1.append(next_step)
         list3.append(next_step)
     
         value = -negamax(not is_ai, depth - 1, -beta, -alpha)
         if is_ai:
-            list1.remove(next_step)
-        else:
             list2.remove(next_step)
+        else:
+            list1.remove(next_step)
         list3.remove(next_step)
     
         if value > alpha:

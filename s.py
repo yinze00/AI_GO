@@ -184,20 +184,20 @@ def game_win(list):
   """
   胜利条件判断
   """
-  # for m in range(COLUMN):
-  #   for n in range(ROW):
-  #     if n < ROW - 4 and (m, n) in list and (m, n + 1) in list and (m, n + 2) in list and (
-  #         m, n + 3) in list and (m, n + 4) in list:
-  #       return True
-  #     elif m < ROW - 4 and (m, n) in list and (m + 1, n) in list and (m + 2, n) in list and (
-  #         m + 3, n) in list and (m + 4, n) in list:
-  #       return True
-  #     elif m < ROW - 4 and n < ROW - 4 and (m, n) in list and (m + 1, n + 1) in list and (
-  #         m + 2, n + 2) in list and (m + 3, n + 3) in list and (m + 4, n + 4) in list:
-  #       return True
-  #     elif m < ROW - 4 and n > 3 and (m, n) in list and (m + 1, n - 1) in list and (
-  #         m + 2, n - 2) in list and (m + 3, n - 3) in list and (m + 4, n - 4) in list:
-  #       return True
+  for m in range(COLUMN):
+    for n in range(ROW):
+      if n < ROW - 4 and (m, n) in list and (m, n + 1) in list and (m, n + 2) in list and (
+          m, n + 3) in list and (m, n + 4) in list:
+        return True
+      elif m < ROW - 4 and (m, n) in list and (m + 1, n) in list and (m + 2, n) in list and (
+          m + 3, n) in list and (m + 4, n) in list:
+        return True
+      elif m < ROW - 4 and n < ROW - 4 and (m, n) in list and (m + 1, n + 1) in list and (
+          m + 2, n + 2) in list and (m + 3, n + 3) in list and (m + 4, n + 4) in list:
+        return True
+      elif m < ROW - 4 and n > 3 and (m, n) in list and (m + 1, n - 1) in list and (
+          m + 2, n - 2) in list and (m + 3, n - 3) in list and (m + 4, n - 4) in list:
+        return True
   return False
   
   
