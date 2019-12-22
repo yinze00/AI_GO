@@ -5,11 +5,6 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class Solution:
-    def kthSmallest(self, root: TreeNode, k: int) -> int:
-        minnode = root
-        stack = []
-        while minnode.left:
-            stack.append(minnode)
-            minnode = minnode.left
-            int k = 10 
+a = (1, 2);
+a[1] = 10
+print(a)
