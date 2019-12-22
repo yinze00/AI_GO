@@ -42,7 +42,8 @@ shape_score = [(50, (0, 1, 1, 0, 0)),
 
 
 def ai_step():
-    '''
+    ''' 
+    
     AI下一步棋判断
     :return: next_point
     '''
