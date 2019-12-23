@@ -32,7 +32,7 @@ shape_score = [(50, (0, 1, 1, 0, 0)),       #　活２
 * 在纵横斜四个方向上探查某一点周围的点的情况
 ```python
 my_score += cal_score(m, n, 0, 1, enemy_list, my_list, score_all_arr)   # 水平方向得分
-my_score += cal_score(m, n, 1, 0, enemy_list, my_list, score_all_arr)   # 述职方向得分
+my_score += cal_score(m, n, 1, 0, enemy_list, my_list, score_all_arr)   # 竖直方向得分
 my_score += cal_score(m, n, 1, 1, enemy_list, my_list, score_all_arr)   # 左斜方向得分
 my_score += cal_score(m, n, -1, 1, enemy_list, my_list, score_all_arr)  # 右斜方向得分
 ```
