@@ -5,8 +5,8 @@ My AI course project based on alpha-belta pruning
     2.尽可能比较不同评价策略或优化搜索，要有实验数据支持
 ## 验收效果
 <p align="center">
-    <img src="img/show.gif", width="360">
-    <img src="img/go7.jpg", width="300">
+    <img src="img/shownew.gif", width="360">
+    <img src="img/go7.jpg", width="360">
 </p>
 
 ### 棋局评价
@@ -88,4 +88,5 @@ def negamax(is_ai, depth, alpha, beta):
     return alpha
 ```
 ### 运行情况
-> 
+* 用TA提供的得分评价函数在大部分情况都是比较好的。有几次都输给AI了
+* 
