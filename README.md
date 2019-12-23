@@ -1,4 +1,4 @@
-# AI_GO
+# AI_GO 汪俊威 3170105970
 My AI course project based on alpha-belta pruning
 
 >1.重点实现棋局评价，博弈树剪枝<br>
