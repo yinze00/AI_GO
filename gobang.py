@@ -11,7 +11,8 @@ from math import *
 GRID_WIDTH = 40
 COLUMN = 15
 ROW = 15
-
+WHITE_COUNT = 0
+BLACK_COUNT = 0
 list1 = []  # 黑子 or 人类
 list2 = []  # 白子 or AI
 list3 = []  # all
@@ -287,15 +288,20 @@ def main_AI():
         if change % 2 == 0: #黑子
             p = win.getMouse()
             if not ((round((p.getX()) / GRID_WIDTH), round((p.getY()) / GRID_WIDTH)) in list3):
-
+    
                 a = round((p.getX()) / GRID_WIDTH)
                 b = round((p.getY()) / GRID_WIDTH)
                 list1.append((a, b))
                 list3.append((a, b))
+                # 画圆
 
                 piece = Circle(Point(GRID_WIDTH * a, GRID_WIDTH * b), 16)
                 piece.setFill('black')
                 piece.draw(win)
+                # 圆上画数字
+                message = Text(Point(GRID_WIDTH * a, GRID_WIDTH * b), str((change+2)//2));
+                message.setTextColor('white')
+                message.draw(win)
 
                 if game_win(list1):
                     message = Text(Point(100, 100), "black win.")
@@ -317,7 +323,9 @@ def main_AI():
             piece = Circle(Point(GRID_WIDTH * pos[0], GRID_WIDTH * pos[1]), 16)
             piece.setFill('white')
             piece.draw(win)
-
+            message = Text(Point(GRID_WIDTH * pos[0], GRID_WIDTH * pos[1]), str((change + 1) // 2))
+            message.setTextColor('black')
+            message.draw(win)
             if game_win(list2):
                 message = Text(Point(100, 100), "white win.")
                 message.draw(win)
@@ -354,6 +362,7 @@ def main_Human():
                 piece = Circle(Point(GRID_WIDTH * a, GRID_WIDTH * b), 16)
                 piece.setFill('black')
                 piece.draw(win)
+                
                 if game_win(list1):
                     message = Text(Point(100, 100), "black win.")
                     message.draw(win)
