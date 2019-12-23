@@ -33,3 +33,54 @@ my_score += cal_score(m, n, -1, 1, enemy_list, my_list, score_all_arr)  # 右斜
 
 ### 博弈树剪枝
 * α-β剪枝算法
+
+    ![](https://images2015.cnblogs.com/blog/932056/201610/932056-20161030011758062-2105197627.jpg)
+* 原理
+    一种倒推对抗性搜索算法，可以减少**极小化极大值搜索**树节点数，当算法评估出某策略的后续走法比之前的策略还差时，就会停止计算该策略的后续发展
+* 本文代码
+```python
+def negamax(is_ai, depth, alpha, beta):
+    '''
+    负值极大算法搜索 alpha + beta剪枝
+    :param is_ai: 是否是ai轮
+    :param depth: 搜索深度
+    :return: alpha or beta（需要补全）
+    '''
+    # 游戏是否结束 | | 探索的递归深度是否到边界
+    if game_win(list1) or game_win(list2) or depth == 0:
+        return evaluation(is_ai)
+    
+    blank_list = list(set(list_all).difference(set(list3)))
+    order(blank_list)   # 搜索顺序排序  提高剪枝效率
+    # TODO: 对每一个候选步进行递归并剪枝，将最后决策出的next_point赋值，将函数剩下部分补全
+    # .....
+    for next_step in blank_list[::]:
+        # 如果要评估的位置没有相邻的子，则不去评估 减少计算 
+        if not has_neightnor(next_step):
+            continue
+    
+        if is_ai:
+            list2.append(next_step)
+        else:
+            list1.append(next_step)
+        list3.append(next_step)
+    
+        value = -negamax(not is_ai, depth - 1, -beta, -alpha)
+        if is_ai:
+            list2.remove(next_step)
+        else:
+            list1.remove(next_step)
+        list3.remove(next_step)
+    
+        if value > alpha:
+            if depth == DEPTH:
+                next_point[0] = next_step[0]
+                next_point[1] = next_step[1]
+            # alpha + beta剪枝点
+            if value >= beta:
+                return beta
+            alpha = value
+    return alpha
+```
+### 运行情况
+> 
