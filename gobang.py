@@ -11,8 +11,8 @@ from math import *
 GRID_WIDTH = 40
 COLUMN = 15
 ROW = 15
-WHITE_COUNT = 0
-BLACK_COUNT = 0
+Black_minus_WHITE = 0
+
 list1 = []  # 黑子 or 人类
 list2 = []  # 白子 or AI
 list3 = []  # all
@@ -25,14 +25,14 @@ DEPTH = 3  # 搜索深度，只能是单数。
 
 # 棋型的评估分数,1表示有子,0表示无子
 # TODO:以下为举例用的棋形评估分数，可以自己扩展与改分
-shape_score = [(50, (0, 1, 1, 0, 0)),
-               (50, (0, 0, 1, 1, 0)),
-               (200, (1, 1, 0, 1, 0)),
-               (500, (0, 0, 1, 1, 1)),
-               (500, (1, 1, 1, 0, 0)),
-               (5000, (0, 1, 1, 1, 0)),
-               (5000, (0, 1, 0, 1, 1, 0)),
-               (5000, (0, 1, 1, 0, 1, 0)),
+shape_score = [(50, (0, 1, 1, 0, 0)),       #　活２
+               (50, (0, 0, 1, 1, 0)),       #  活2
+               (200, (1, 1, 0, 1, 0)),      #  缺一4
+               (500, (0, 0, 1, 1, 1)),      #  边3
+               (500, (1, 1, 1, 0, 0)),      #  边3
+               (6000, (0, 1, 1, 1, 0)),     #  活3
+               (5000, (0, 1, 0, 1, 1, 0)),  #  活3
+               (5000, (0, 1, 1, 0, 1, 0)),  #  活3
                (5000, (1, 1, 1, 0, 1)),
                (5000, (1, 1, 0, 1, 1)),
                (5000, (1, 0, 1, 1, 1)),
@@ -48,7 +48,7 @@ def ai_step():
     AI下一步棋判断
     :return: next_point
     '''
-    negamax(True, DEPTH, -99999999, 99999999)
+    Black_minus_WHITE = negamax(True, DEPTH, -99999999, 99999999)
     return next_point[0], next_point[1]
 
 def negamax(is_ai, depth, alpha, beta):
@@ -161,7 +161,9 @@ def evaluation(is_ai):
         enemy_score += cal_score(m, n, 1, 1, my_list, enemy_list, score_all_arr_enemy)
         enemy_score += cal_score(m, n, -1, 1, my_list, enemy_list, score_all_arr_enemy)
 
-    total_score = my_score - enemy_score*ratio*0.1
+    total_score = my_score - enemy_score * ratio * 0.1
+    
+
 
     return total_score
 
@@ -256,7 +258,7 @@ def game_win(list):
 
 def gobangwin():
     ''' 绘制基本棋盘界面 '''
-    win = GraphWin("this is a gobang game", GRID_WIDTH * COLUMN, GRID_WIDTH * ROW)
+    win = GraphWin("this is a gobang game", GRID_WIDTH * (COLUMN), GRID_WIDTH * (ROW+3))
     win.setBackground("yellow")
     i1 = 0
 
@@ -270,6 +272,13 @@ def gobangwin():
         l = Line(Point(0, i2), Point(GRID_WIDTH * ROW, i2))
         l.draw(win)
         i2 = i2 + GRID_WIDTH
+
+    mess1 = Text(Point(GRID_WIDTH * 2, GRID_WIDTH * 16), "AI    Score:");
+    mess2 = Text(Point(GRID_WIDTH * 2, GRID_WIDTH * 17), "Human Score:")
+    mess1.setTextColor('blue')
+    mess2.setTextColor('blue')
+    mess1.draw(win)
+    mess2.draw(win)
     return win
 
 
@@ -308,6 +317,13 @@ def main_AI():
                     message.draw(win)
                     g = 1
                 change = change + 1
+            black_rec = evaluation(False)
+            print(black_rec)
+            rect = Rectangle(Point(GRID_WIDTH * 5, GRID_WIDTH * 15.5), Point(GRID_WIDTH * 8, GRID_WIDTH * 16.5))
+            rect.setFill('yellow')
+            rect.draw(win)
+            mess = Text(Point(GRID_WIDTH * 6, GRID_WIDTH * 16), str(black_rec))
+            mess.draw(win)
 
         elif change %2 ==1: #白子
             pos = ai_step()
@@ -331,6 +347,15 @@ def main_AI():
                 message.draw(win)
                 g = 1
             change = change + 1
+            white_rec = evaluation(True)
+            print(white_rec)
+            rect = Rectangle(Point(GRID_WIDTH * 5, GRID_WIDTH * 16.5), Point(GRID_WIDTH * 8, GRID_WIDTH * 17.5))
+            rect.setFill('yellow')
+            rect.draw(win)
+            mess = Text(Point(GRID_WIDTH * 6, GRID_WIDTH * 17), str(white_rec))
+            mess.draw(win)
+        #　在图中显示AI和自己的评价函数
+
 
     message = Text(Point(100, 120), "Click anywhere to quit.")
     message.draw(win)
@@ -362,14 +387,15 @@ def main_Human():
                 piece = Circle(Point(GRID_WIDTH * a, GRID_WIDTH * b), 16)
                 piece.setFill('black')
                 piece.draw(win)
-                
+                message = Text(Point(GRID_WIDTH * a, GRID_WIDTH * b), str((change+2)//2));
+                message.setTextColor('white')
+                message.draw(win)
                 if game_win(list1):
                     message = Text(Point(100, 100), "black win.")
                     message.draw(win)
                     g = 1
 
                 change = change + 1
-
         elif change % 2 == 1: # 白子
             if not ((round((p.getX()) / GRID_WIDTH), round((p.getY()) / GRID_WIDTH)) in list3):
 
@@ -381,6 +407,9 @@ def main_Human():
                 piece = Circle(Point(GRID_WIDTH * a, GRID_WIDTH * b), 16)
                 piece.setFill('white')
                 piece.draw(win)
+                message = Text(Point(GRID_WIDTH * a, GRID_WIDTH * b), str((change+1)//2));
+                message.setTextColor('black')
+                message.draw(win)
                 if game_win(list2):
                     message = Text(Point(100, 100), "White win.")
                     message.draw(win)
