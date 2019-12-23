@@ -6,7 +6,7 @@ My AI course project based on alpha-belta pruning
 ## 验收效果
 <p align="center">
     <img src="img/shownew.gif", width="360">
-    <img src="img/go7.jpg", width="360">
+    <img src="img/go7.JPG", width="360">
 </p>
 
 ### 棋局评价
@@ -90,13 +90,13 @@ def negamax(is_ai, depth, alpha, beta):
 * 有一些情况不如人意，我们经验推测在攻与受的抉择之间的
     * 比如我方的活3 **（01110)** 不堵住去成自己的 半边4 **-11110** 这样子
     <p align="center">
-        <img src="img/go3.jpg", width="360">
+        <img src="img/go3.JPG", width="360">
     </p>
     <br>这种情况我觉得应该减少眠4的分数，适当改善攻守关系
 
     * 还有一些情况，比如交叉3的得分会翻倍，直接让 **5000x2 == 10000** 
       但是交叉3至少需要两步才能成功，即使是一定成功，但是我方的眠4只需要一布就能赢了
         <p align="center">
-            <img src="img/go8.jpg", width="360">
+            <img src="img/go8.JPG", width="360">
         </p>
     
