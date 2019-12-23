@@ -43,7 +43,7 @@ shape_score = [(50, (0, 1, 1, 0, 0)),
 
 def ai_step():
     ''' 
-    
+
     AI下一步棋判断
     :return: next_point
     '''
@@ -144,10 +144,10 @@ def evaluation(is_ai):
     for pt in my_list:
         m = pt[0]
         n = pt[1]
-        my_score += cal_score(m, n, 0, 1, enemy_list, my_list, score_all_arr)
-        my_score += cal_score(m, n, 1, 0, enemy_list, my_list, score_all_arr)
-        my_score += cal_score(m, n, 1, 1, enemy_list, my_list, score_all_arr)
-        my_score += cal_score(m, n, -1, 1, enemy_list, my_list, score_all_arr)
+        my_score += cal_score(m, n, 0, 1, enemy_list, my_list, score_all_arr) # 水平方向得分
+        my_score += cal_score(m, n, 1, 0, enemy_list, my_list, score_all_arr) # 述职方向得分
+        my_score += cal_score(m, n, 1, 1, enemy_list, my_list, score_all_arr) # 左斜方向得分
+        my_score += cal_score(m, n, -1, 1, enemy_list, my_list, score_all_arr)# 右斜方向得分
 
     #  算敌人的得分，并减去
     score_all_arr_enemy = []
