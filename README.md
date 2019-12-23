@@ -63,7 +63,6 @@ def negamax(is_ai, depth, alpha, beta):
         # 如果要评估的位置没有相邻的子，则不去评估 减少计算 
         if not has_neightnor(next_step):
             continue
-    
         if is_ai:
             list2.append(next_step)
         else:
@@ -81,7 +80,6 @@ def negamax(is_ai, depth, alpha, beta):
             if depth == DEPTH:
                 next_point[0] = next_step[0]
                 next_point[1] = next_step[1]
-            # alpha + beta剪枝点
             if value >= beta:
                 return beta
             alpha = value
@@ -89,4 +87,16 @@ def negamax(is_ai, depth, alpha, beta):
 ```
 ### 运行情况
 * 用TA提供的得分评价函数在大部分情况都是比较好的。有几次都输给AI了
-* 
+* 有一些情况不如人意，我们经验推测在攻与受的抉择之间的
+    * 比如我方的活3 **（01110)** 不堵住去成自己的 半边4 **-11110** 这样子
+    <p align="center">
+        <img src="img/go3.jpg", width="360">
+    </p>
+    <br>这种情况我觉得应该减少眠4的分数，适当改善攻守关系
+
+    * 还有一些情况，比如交叉3的得分会翻倍，直接让 **5000x2 == 10000** 
+      但是交叉3至少需要两步才能成功，即使是一定成功，但是我方的眠4只需要一布就能赢了
+        <p align="center">
+            <img src="img/go8.jpg", width="360">
+        </p>
+    
