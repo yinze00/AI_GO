@@ -424,5 +424,5 @@ def main_Human():
 
 
 if __name__ == '__main__':
-    # main_AI()
-    main_Human()
+    main_AI()
+    # main_Human()
