@@ -30,16 +30,16 @@ shape_score = [(50, (0, 1, 1, 0, 0)),       #　活２
                (200, (1, 1, 0, 1, 0)),      #  缺一4
                (500, (0, 0, 1, 1, 1)),      #  边3
                (500, (1, 1, 1, 0, 0)),      #  边3
-               (6000, (0, 1, 1, 1, 0)),     #  活3
-               (5000, (0, 1, 0, 1, 1, 0)),  #  活3
+               (4000, (0, 1, 1, 1, 0)),     #  活3
+               (5000, (0, 1, 0, 1, 1, 0)),  #  活3(缺1活4)
                (5000, (0, 1, 1, 0, 1, 0)),  #  活3
-               (5000, (1, 1, 1, 0, 1)),
-               (5000, (1, 1, 0, 1, 1)),
-               (5000, (1, 0, 1, 1, 1)),
-               (5000, (1, 1, 1, 1, 0)),
-               (5000, (0, 1, 1, 1, 1)),
-               (50000, (0, 1, 1, 1, 1, 0)),
-               (99999999, (1, 1, 1, 1, 1))]
+               (5000, (1, 1, 1, 0, 1)),     #  缺一5
+               (5000, (1, 1, 0, 1, 1)),     #  缺一5
+               (5000, (1, 0, 1, 1, 1)),     #  缺一5
+               (4499, (1, 1, 1, 1, 0)),     #  边4
+               (4499, (0, 1, 1, 1, 1)),     #  边4
+               (100000, (0, 1, 1, 1, 1, 0)),#  活4
+               (99999999, (1, 1, 1, 1, 1))] #  WoW  What a coincidence！
 
 
 def ai_step():
@@ -194,13 +194,13 @@ def cal_score(m, n, x_decrict, y_derice, enemy_list, my_list, score_all_arr):
     # TODO: 在落子点指定方向上查找形状，并根据shape_score计分，将最大的score值与其对应shape赋值给max_score_shape,在END前补齐代码
     # ......
     # 在落子点 左右方向上循环查找得分形状
-    for offset in range(-5, 1):
-    # offset = -2
+    for delta in range(-5, 1):
+    # delta = -2
         pos = []
         for i in range(0, 6):
-            if (m + (i + offset) * x_decrict, n + (i + offset) * y_derice) in enemy_list:
+            if (m + (i + delta) * x_decrict, n + (i + delta) * y_derice) in enemy_list:
                 pos.append(2)
-            elif (m + (i + offset) * x_decrict, n + (i + offset) * y_derice) in my_list:
+            elif (m + (i + delta) * x_decrict, n + (i + delta) * y_derice) in my_list:
                 pos.append(1)
             else:
                 pos.append(0)
@@ -210,11 +210,11 @@ def cal_score(m, n, x_decrict, y_derice, enemy_list, my_list, score_all_arr):
         for (score, shape) in shape_score:
             if tmp_shap5 == shape or tmp_shap6 == shape:
                 if score > max_score_shape[0]:
-                    max_score_shape = (score, ((m + (0 + offset) * x_decrict, n + (0 + offset) * y_derice),
-                                (m + (1 + offset) * x_decrict, n + (1 + offset) * y_derice),
-                                (m + (2 + offset) * x_decrict, n + (2 + offset) * y_derice),
-                                (m + (3 + offset) * x_decrict, n + (3 + offset) * y_derice),
-                                (m + (4 + offset) * x_decrict, n + (4 + offset) * y_derice)),
+                    max_score_shape = (score, ((m + (0 + delta) * x_decrict, n + (0 + delta) * y_derice),
+                                (m + (1 + delta) * x_decrict, n + (1 + delta) * y_derice),
+                                (m + (2 + delta) * x_decrict, n + (2 + delta) * y_derice),
+                                (m + (3 + delta) * x_decrict, n + (3 + delta) * y_derice),
+                                (m + (4 + delta) * x_decrict, n + (4 + delta) * y_derice)),
                             (x_decrict, y_derice))
 
     # END
